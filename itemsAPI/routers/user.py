@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Response
-from .. import schemas
+from fastapi import APIRouter, Response, Depends
+from .. import schemas, database
 from ..crud import userCrud
+from sqlalchemy.orm import Session
 
+get_db = database.get_db
 
 
 router = APIRouter(
@@ -11,5 +13,5 @@ router = APIRouter(
 
 
 @router.post('/', response_model= schemas.UserShow)
-def create_user(request: schemas.User):
-    return userCrud.create(request)
+def create_user(request: schemas.User, db: Session = Depends(get_db)):
+    return userCrud.create(request, db)
