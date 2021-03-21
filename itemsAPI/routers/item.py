@@ -36,8 +36,15 @@ def getAllItem(db: Session=Depends(get_db)):
     return itemCrud.get_all_items(db)
 
 
-#Route for the insert item in database
+#Route for the delete item in database
 
 @router.delete('/{id}')
 def deleteItem(id: int, db: Session=Depends(get_db)):
     return itemCrud.delete_item(id, db)
+
+
+#Route for the update item in database
+
+@router.put('/update')
+def updateItem(id: int, request: schemas.Items, db: Session=Depends(get_db)):
+    return itemCrud.update_item(id, request, db)

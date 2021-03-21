@@ -24,7 +24,7 @@ class UserShow(BaseModel):
 """ schema for item model will be used in itemCrud"""
 
 class Items(BaseModel):
-    itemName: str
-    itemLocation: str
-    itemDescription: str
-    itemDate : date
+    item_name: str
+    item_location: str
+    item_description: str
+    item_date : date

@@ -8,8 +8,8 @@ from sqlalchemy import or_
 #Method to insert the item in database
 
 def create_item(request: schemas.Items, db: Session):
-    new_item = models.Item(item_name=request.itemName, item_location=request.itemLocation,
-     item_description=request.itemDescription, item_date=request.itemDate)
+    new_item = models.Item(item_name=request.item_name, item_location=request.item_location,
+     item_description=request.item_description, item_date=request.item_date)
 
     db.add(new_item)
     db.commit()
@@ -42,3 +42,12 @@ def delete_item(itemDelete: int, db: Session):
     item.delete()
     db.commit()
     return 'Deleted...'
+
+
+#Method to update the item from database
+
+def update_item(id: int, request: schemas.Items, db: Session):
+    item = db.query(models.Item).filter(models.Item.id == id)
+    item.update(request.dict())
+    db.commit()
+    return 'Updated..'
