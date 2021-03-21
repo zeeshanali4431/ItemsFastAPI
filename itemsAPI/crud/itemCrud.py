@@ -1,6 +1,7 @@
 from fastapi import Depends
 from .. import schemas, models
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 
 
@@ -14,3 +15,13 @@ def create_item(request: schemas.Items, db: Session):
     db.commit()
     db.refresh(new_item)
     return new_item
+
+
+#Method to insert the item in database
+
+def search_item(itemSearch: str, db: Session):
+    item = db.query(models.Item).filter(
+        or_(models.Item.item_name == itemSearch, models.Item.item_location == itemSearch)
+    ).all()
+
+    return item
