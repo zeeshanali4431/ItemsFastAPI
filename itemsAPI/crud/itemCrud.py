@@ -17,7 +17,15 @@ def create_item(request: schemas.Items, db: Session):
     return new_item
 
 
-#Method to insert the item in database
+
+#Method to get all the items from the database
+
+def get_all_items(db: Session):
+    item = db.query(models.Item).all()
+    return item
+
+
+#Method to Search the item from the database
 
 def search_item(itemSearch: str, db: Session):
     item = db.query(models.Item).filter(
@@ -25,3 +33,12 @@ def search_item(itemSearch: str, db: Session):
     ).all()
 
     return item
+
+
+#Method to delete the item from database
+
+def delete_item(itemDelete: int, db: Session):
+    item = db.query(models.Item).filter(models.Item.id == itemDelete)
+    item.delete()
+    db.commit()
+    return 'Deleted...'
