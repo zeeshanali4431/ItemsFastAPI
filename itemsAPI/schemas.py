@@ -28,3 +28,17 @@ class Items(BaseModel):
     item_location: str
     item_description: str
     item_date : date
+    
+    class Config():
+        orm_mode = True
+
+class ShowItems(BaseModel):
+    item_name: str
+    item_location: str
+    item_description: str
+    item_date : date
+
+    user : UserShow
+    class Config():
+        orm_mode = True
+

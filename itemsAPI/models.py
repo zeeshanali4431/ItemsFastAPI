@@ -15,6 +15,8 @@ class User(Base):
     email = Column(String(200), unique=True, index=True, nullable=False)
     password = Column(String(200), nullable=False)
 
+    items = relationship("Item", back_populates="user")
+
 
 
 
@@ -28,3 +30,7 @@ class Item(Base):
     item_location = Column(String(300), nullable=False)
     item_description = Column(String(300), nullable=False)
     item_date = Column(Date, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+
+    user = relationship("User", back_populates="items")

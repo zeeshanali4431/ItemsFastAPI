@@ -2,6 +2,7 @@ from fastapi import Depends
 from .. import schemas, models
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
+from typing import List
 
 
 
@@ -9,7 +10,7 @@ from sqlalchemy import or_
 
 def create_item(request: schemas.Items, db: Session):
     new_item = models.Item(item_name=request.item_name, item_location=request.item_location,
-     item_description=request.item_description, item_date=request.item_date)
+     item_description=request.item_description, item_date=request.item_date, user_id=1)
 
     db.add(new_item)
     db.commit()

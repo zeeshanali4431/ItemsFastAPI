@@ -1,7 +1,8 @@
-from fastapi import FastAPI, APIRouter, Depends
+from fastapi import APIRouter, Response, Depends
 from .. import schemas, database, models
 from ..crud import itemCrud
 from sqlalchemy.orm import Session
+from typing import List
 
 
 
@@ -17,21 +18,21 @@ router= APIRouter(
 
 #Route for the insert item in database
 
-@router.post('/')
+@router.post('/', response_model=schemas.Items)
 def createItem(request: schemas.Items, db: Session=Depends(get_db)):
     return itemCrud.create_item(request, db)
 
 
 #Route for the insert item in database
 
-@router.get('/')
+@router.get('/', response_model=List[schemas.ShowItems])
 def searchItem(item: str, db: Session=Depends(get_db)):
     return itemCrud.search_item(item, db)
 
 
 #Route for the list of all items in database
 
-@router.get('/all')
+@router.get('/all', response_model=List[schemas.ShowItems])
 def getAllItem(db: Session=Depends(get_db)):
     return itemCrud.get_all_items(db)
 
