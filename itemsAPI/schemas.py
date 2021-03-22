@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 from datetime import date
 
 
@@ -46,8 +47,18 @@ class ShowItems(BaseModel):
         orm_mode = True
 
 
-
+#Schema for the Login
 
 class Login(BaseModel):
     username: str
     password: str
+
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
