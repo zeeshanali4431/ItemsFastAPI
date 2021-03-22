@@ -32,6 +32,9 @@ class Items(BaseModel):
     class Config():
         orm_mode = True
 
+
+#Response model for showing the Relationship b/w User and Items
+
 class ShowItems(BaseModel):
     item_name: str
     item_location: str
@@ -42,3 +45,9 @@ class ShowItems(BaseModel):
     class Config():
         orm_mode = True
 
+
+
+
+class Login(BaseModel):
+    username: str
+    password: str
