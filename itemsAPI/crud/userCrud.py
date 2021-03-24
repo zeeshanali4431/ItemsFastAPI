@@ -21,4 +21,5 @@ def createUser(request: schemas.User, db: Session):
          detail="password must be atlest 8 characters log and have atleast one upper and one lower and one special character")
     return new_user
 
+
     
